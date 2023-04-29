@@ -21,6 +21,67 @@ You can run this app as a simple python script or by executing the binary file f
 * __On Linux__ have libusb1 installed (you probably already have).
 * Download/clone this repo and simply run `app.py` like you would any python script.
 
+<details>
+	<summary>Mac Install Tutorial (Apple Silicon M1/M2 & Intel Macs)</summary>
+	It's recommended you have a basic understanding of how to use Terminal, as this will makes things a bit easier.
+
+	If you don't have Homebrew already installed, [install homebrew](https://brew.sh/).
+
+	1. Open Terminal
+	2. Install the dependencies:
+	```sh
+	brew install libusb python3 tcl-tk python-tk
+	```
+
+	3. Reopen Terminal, as there will be some new paths.
+
+	4. `python3 --version` should return `Python 3.xxx.yyy`, where `xxx` is a major version such as 11, 12, etc. yyy is the minor version.
+
+	> As of April 2023, Python 3.11 is the current stable version of Python. Future versions, *should* work. If the below steps don't work with `Python 3.12` etc, you can install Python 3.11 & Python-tk for Python3.11 via `brew install python@3.11 python-tk@3.11`. Then in the following steps, instead of using `python3`, use `python@3.11` to run Python 3.11.
+
+	5. `git clone` the repository, `cd` into it:
+	```sh
+	git clone https://github.com/nh-server/fusee-interfacee-tk
+	cd fusee-interfacee-tk
+	```
+
+	> If you have issues with Git, you can also download the repository directly [here](https://github.com/nh-server/fusee-interfacee-tk/archive/refs/heads/master.zip), extract it then cd into it. Mac does come with Git, so it should work.
+
+	```sh
+	# Run the below steps only if Git doesn't work.
+	curl -L https://github.com/nh-server/fusee-interfacee-tk/archive/refs/heads/master.zip --output fusee-interfacee-tk.zip
+	unzip fusee-interfacee-tk.zip
+	cd fusee-interfacee-tk.zip
+	```
+
+	6. Create a "virtual environment", which means that packages will be installed within this directory instead of system wide, which might cause conflicts and other issues.
+	```sh
+	python3 -m venv .venv
+	```
+
+	7. Install the needed Python packages:
+	```sh
+	./.venv/bin/pip install pyusb
+	```
+
+	> You can also use`source .venv/bin/activate`, which activates a "virtual environment". But as we are just running a couple of steps, prefixing our commands with `.venv/bin/` is fine.
+
+	8. Now you should be able to run the script. Running this command should show the GUI. In future you should just be able to run this command and not need to perform steps 1-7:
+
+	```sh
+	./.venv/bin/python3 app.py
+	```
+
+	## Copy+paste, once you have installed Homebrew:
+	```sh
+	brew install libusb python3 tcl-tk python-tk
+	git clone https://github.com/nh-server/fusee-interfacee-tk
+	cd fusee-interfacee-tk
+	python3 -m venv .venv
+	./.venv/bin/pip install pyusb
+	./.venv/bin/python3 app.py
+	```
+</details>
 
 ### Running the binary file
 ### Linux
