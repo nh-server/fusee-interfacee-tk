@@ -6,10 +6,7 @@ from tkinter.filedialog import askopenfilename
 import fusee_launcher as fusee
 import mock_arguments
 
-
-
 class App(tk.Frame):
-
     def __init__(self, master=None):
         tk.Frame.__init__(self, master)
         self.grid()
@@ -17,44 +14,40 @@ class App(tk.Frame):
 
         self.payload_path = ''
         self.device_found = False
-        self.lbl_length   = 22
-        self.usb_backend  = fusee.HaxBackend.create_appropriate_backend()
+        self.lbl_length = 22
+        self.usb_backend = fusee.HaxBackend.create_appropriate_backend()
 
         root = self.winfo_toplevel()
-        root.update()
-        root.resizable(0, 0)
+        root.title('Payload Injector')
+        root.geometry('400x200')  # Set a specific window size
+        root.resizable(1, 1)
 
         self.do_update()
 
-
-
     def build_widgets(self):
-        style = ttk.Style()
-        style.configure('Horizontal.TProgressbar', background='#5eba21')
-        
         main_frame = ttk.Frame(self, padding="10")
         main_frame.grid(row=0, column=0, sticky=(tk.W, tk.E, tk.N, tk.S))
 
-        self.progress = ttk.Progressbar(main_frame, mode='indeterminate', maximum=50)
-        self.progress.grid(row=0, columnspan=2, sticky=tk.W+tk.E, padx=10, pady=10)
+        self.progress = ttk.Progressbar(main_frame, mode='indeterminate', maximum=50, style='Horizontal.TProgressbar')
+        self.progress.grid(row=0, columnspan=2, sticky=tk.W+tk.E+tk.N+tk.S, padx=10, pady=10)
         self.progress.start(30)
 
-        self.lbl_look = ttk.Label(main_frame, text="Looking for Device...", font=('Helvetica', 10))
+        self.lbl_look = ttk.Label(main_frame, text="Looking for Device...", font=('Helvetica', 14, 'bold'))
         self.lbl_look.grid(row=1, column=0, columnspan=2, pady=10)
 
         self.btn_open = ttk.Button(main_frame, text="Select Payload", command=self.btn_open_pressed)
         self.btn_open.grid(row=2, column=0, padx=10, pady=10)
 
-        self.lbl_file = ttk.Label(main_frame, text="No Payload Selected.    ", justify=tk.LEFT)
+        self.lbl_file = ttk.Label(main_frame, text="No Payload Selected", justify=tk.LEFT)
         self.lbl_file.grid(row=2, column=1, padx=10, pady=10)
 
         self.btn_send = ttk.Button(main_frame, text="Send Payload!", command=self.btn_send_pressed)
-        self.btn_send.grid(row=3, column=0, columnspan=2, sticky=tk.W+tk.E, pady=10, padx=10)
-        self.btn_send.state(('disabled',)) # trailing comma to define single element tuple
+        self.btn_send.grid(row=3, column=0, columnspan=2, pady=10, padx=10)
+        self.btn_send.state(('disabled',))
 
         self.btn_mountusb = ttk.Button(main_frame, text="Mount SD on PC", command=self.btn_mountusb_pressed)
-        self.btn_mountusb.grid(row=4, column=0, columnspan=2, sticky=tk.W+tk.E, pady=10, padx=10)
-        self.btn_mountusb.state(('disabled',)) # trailing comma to define single element tuple
+        self.btn_mountusb.grid(row=4, column=0, columnspan=2, pady=10, padx=10)
+        self.btn_mountusb.state(('disabled',))
 
 
     def do_update(self):
