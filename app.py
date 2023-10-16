@@ -31,25 +31,29 @@ class App(tk.Frame):
     def build_widgets(self):
         style = ttk.Style()
         style.configure('Horizontal.TProgressbar', background='#5eba21')
-        self.progress = ttk.Progressbar(self, mode='indeterminate', maximum=50)
-        self.progress.grid(row=0, columnspan=2, sticky=tk.W+tk.E)
+        
+        main_frame = ttk.Frame(self, padding="10")
+        main_frame.grid(row=0, column=0, sticky=(tk.W, tk.E, tk.N, tk.S))
+
+        self.progress = ttk.Progressbar(main_frame, mode='indeterminate', maximum=50)
+        self.progress.grid(row=0, columnspan=2, sticky=tk.W+tk.E, padx=10, pady=10)
         self.progress.start(30)
 
-        self.lbl_look = ttk.Label(self, text="Looking for Device...")
-        self.lbl_look.grid(row=1, column=0, columnspan=2, pady=8)
+        self.lbl_look = ttk.Label(main_frame, text="Looking for Device...", font=('Helvetica', 10))
+        self.lbl_look.grid(row=1, column=0, columnspan=2, pady=10)
 
-        self.btn_open = ttk.Button(self, text="Select Payload", command=self.btn_open_pressed)
-        self.btn_open.grid(row=2, column=0, padx=8)
+        self.btn_open = ttk.Button(main_frame, text="Select Payload", command=self.btn_open_pressed)
+        self.btn_open.grid(row=2, column=0, padx=10, pady=10)
 
-        self.lbl_file = ttk.Label(self, text="No Payload Selected.    ", justify=tk.LEFT)
-        self.lbl_file.grid(row=2, column=1, padx=8)
+        self.lbl_file = ttk.Label(main_frame, text="No Payload Selected.    ", justify=tk.LEFT)
+        self.lbl_file.grid(row=2, column=1, padx=10, pady=10)
 
-        self.btn_send = ttk.Button(self, text="Send Payload!", command=self.btn_send_pressed)
-        self.btn_send.grid(row=3, column=0, columnspan=2, sticky=tk.W+tk.E, pady=8, padx=8)
+        self.btn_send = ttk.Button(main_frame, text="Send Payload!", command=self.btn_send_pressed)
+        self.btn_send.grid(row=3, column=0, columnspan=2, sticky=tk.W+tk.E, pady=10, padx=10)
         self.btn_send.state(('disabled',)) # trailing comma to define single element tuple
 
-        self.btn_mountusb = ttk.Button(self, text="Mount SD on PC", command=self.btn_mountusb_pressed)
-        self.btn_mountusb.grid(row=4, column=0, columnspan=2, sticky=tk.W+tk.E, pady=8, padx=8)
+        self.btn_mountusb = ttk.Button(main_frame, text="Mount SD on PC", command=self.btn_mountusb_pressed)
+        self.btn_mountusb.grid(row=4, column=0, columnspan=2, sticky=tk.W+tk.E, pady=10, padx=10)
         self.btn_mountusb.state(('disabled',)) # trailing comma to define single element tuple
 
 
