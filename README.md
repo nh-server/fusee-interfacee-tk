@@ -1,3 +1,12 @@
+# DEPRECATED
+
+Use fusee-nano instead!
+
+* Guide: https://switch.hacks.guide/user_guide/rcm/sending_payload.html
+* Project: https://github.com/DavidBuchanan314/fusee-nano
+
+---
+
 ![A cute rocket in outerspace!](icon.png)
 # Fusée Launcher Interfacée (Nintendo Homebrew Version)
 A mod of [falquinhos](https://github.com/falquinho/fusee-interfacee-tk) Fusée Launcher for use with Nintendo Homebrew Switch Guide. It also adds the ability to mount SD while in RCM.
